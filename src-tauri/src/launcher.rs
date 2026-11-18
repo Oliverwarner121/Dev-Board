@@ -33,7 +33,6 @@ const SHORTCUTS: &[(&str, Target)] = &[
     ),
     ("outlook", Target::Start(&["outlook"])),
     ("notepad", Target::Start(&["notepad"])),
-    ("explorer", Target::Start(&["explorer"])),
     ("settings", Target::Start(&["ms-settings:"])),
     (
         "postman",

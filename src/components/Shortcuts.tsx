@@ -18,7 +18,6 @@ const GROUPS: { title: string; shortcuts: Shortcut[] }[] = [
       { id: 'visual-studio', label: 'Visual Studio 2026', glyph: 'VS' },
       { id: 'outlook', label: 'Outlook', glyph: 'Ol' },
       { id: 'notepad', label: 'Notepad', glyph: 'Np' },
-      { id: 'explorer', label: 'File Explorer', glyph: '▤' },
       { id: 'settings', label: 'Settings', glyph: '⚙' },
       { id: 'postman', label: 'Postman', glyph: 'Pm' },
       { id: 'http-toolkit', label: 'HTTP Toolkit', glyph: 'Ht' },
