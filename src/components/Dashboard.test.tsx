@@ -65,6 +65,7 @@ describe('Dashboard', () => {
       /HTTP Toolkit/,
       /Firefox/,
       /Vercel/,
+      /Contentstack/,
     ]) {
       expect(screen.getByRole('button', { name })).toBeInTheDocument();
     }

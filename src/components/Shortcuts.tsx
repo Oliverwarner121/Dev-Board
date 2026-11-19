@@ -31,7 +31,7 @@ const GROUPS: { title: string; shortcuts: Shortcut[] }[] = [
       { id: 'firefox', label: 'Firefox', glyph: 'Ff' },
       { id: 'copilot', label: 'Copilot', glyph: 'Co' },
       { id: 'vercel', label: 'Vercel', glyph: '▲' },
-    ],
+            { id: 'contentstack', label: 'Contentstack', glyph: 'Cs' },    ],
   },
 ];
 

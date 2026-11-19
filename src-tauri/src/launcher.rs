@@ -50,6 +50,12 @@ const SHORTCUTS: &[(&str, Target)] = &[
         Target::Start(&["https://copilot.cloud.microsoft/chat"]),
     ),
     ("vercel", Target::Start(&["https://vercel.com/"])),
+    (
+        "contentstack",
+        Target::Start(&[
+            "https://eu-app.contentstack.com/#!/stack/blt323e14610da66977/dashboard?branch=development",
+        ]),
+    ),
 ];
 
 #[derive(Debug, Default, Serialize, PartialEq)]
