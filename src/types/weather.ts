@@ -6,6 +6,14 @@ export interface WeatherLocation {
   longitude: number;
 }
 
+export interface HourlyReading {
+  hour: number;
+  temperature: number;
+  weatherCode: number;
+  isDay: boolean;
+  rainChance: number;
+}
+
 export interface WeatherReading {
   temperature: number;
   feelsLike: number;
@@ -14,6 +22,7 @@ export interface WeatherReading {
   isDay: boolean;
   high: number;
   low: number;
+  hourly: HourlyReading[];
 }
 
 export type LocationWeather =

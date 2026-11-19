@@ -4,8 +4,10 @@ import { describeWeather } from '../utils/weather';
 import { Panel } from './Panel';
 
 export function Weather({ weather }: { weather: WeatherState }) {
+  const hour = new Date().getHours();
+  const currentSlot = hour - (hour % 2);
   return (
-    <Panel title="Weather" eyebrow="FORECAST">
+    <Panel title="Weather" eyebrow="TODAY'S FORECAST" className="weather-panel">
       <ul className="weather-list">
         {WEATHER_LOCATIONS.map((location) => {
           const entry = weather[location.id];
@@ -20,25 +22,57 @@ export function Weather({ weather }: { weather: WeatherState }) {
                 <span>{location.region}</span>
               </div>
               {reading && condition ? (
-                <div className="weather-reading">
-                  <span className="weather-icon" aria-hidden="true">
-                    {condition.icon}
-                  </span>
-                  <div>
-                    <div className="weather-temp">
-                      {Math.round(reading.temperature)}°C
-                    </div>
-                    <div className="weather-detail">{condition.label}</div>
-                  </div>
-                  <div className="weather-meta">
-                    <span>
-                      H {Math.round(reading.high)}° · L{' '}
-                      {Math.round(reading.low)}°
+                <>
+                  <div className="weather-reading">
+                    <span className="weather-icon" aria-hidden="true">
+                      {condition.icon}
                     </span>
-                    <span>Feels {Math.round(reading.feelsLike)}°</span>
-                    <span>{Math.round(reading.windMph)} mph</span>
+                    <div>
+                      <div className="weather-temp">
+                        {Math.round(reading.temperature)}°C
+                      </div>
+                      <div className="weather-detail">{condition.label}</div>
+                    </div>
+                    <div className="weather-meta">
+                      <span>
+                        H {Math.round(reading.high)}° · L{' '}
+                        {Math.round(reading.low)}°
+                      </span>
+                      <span>Feels {Math.round(reading.feelsLike)}°</span>
+                      <span>{Math.round(reading.windMph)} mph</span>
+                    </div>
                   </div>
-                </div>
+                  <ol className="weather-hours" aria-label="Hourly forecast">
+                    {reading.hourly
+                      .filter((slot) => slot.hour % 2 === 0)
+                      .map((slot) => {
+                        const slotCondition = describeWeather(
+                          slot.weatherCode,
+                          slot.isDay,
+                        );
+                        return (
+                          <li
+                            key={slot.hour}
+                            className="weather-hour"
+                            aria-current={
+                              slot.hour === currentSlot ? 'time' : undefined
+                            }
+                          >
+                            <span className="weather-hour-time">
+                              {String(slot.hour).padStart(2, '0')}:00
+                            </span>
+                            <span aria-hidden="true">{slotCondition.icon}</span>
+                            <span className="weather-hour-temp">
+                              {Math.round(slot.temperature)}°
+                            </span>
+                            <span className="weather-hour-rain">
+                              {slot.rainChance}%
+                            </span>
+                          </li>
+                        );
+                      })}
+                  </ol>
+                </>
               ) : entry?.status === 'unavailable' ? (
                 <p className="panel-error" role="alert">
                   {location.name}: {entry.message}

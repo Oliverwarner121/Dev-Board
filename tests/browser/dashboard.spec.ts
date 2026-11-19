@@ -50,6 +50,16 @@ test.beforeEach(async ({ page }) => {
           is_day: 1,
         },
         daily: { temperature_2m_max: [12], temperature_2m_min: [6.7] },
+        hourly: {
+          time: Array.from(
+            { length: 24 },
+            (_, hour) => `2026-01-01T${String(hour).padStart(2, '0')}:00`,
+          ),
+          temperature_2m: Array(24).fill(8),
+          weather_code: Array(24).fill(3),
+          is_day: Array(24).fill(1),
+          precipitation_probability: Array(24).fill(10),
+        },
       },
     }),
   );
@@ -76,6 +86,7 @@ test('renders the glass sections without clipping', async ({
   await expect(page.getByText('Wheatley')).toBeVisible();
   await expect(page.getByText('Wotton-under-Edge')).toBeVisible();
   await expect(page.getByText('11°C')).toHaveCount(2);
+  await expect(page.getByLabel('Hourly forecast')).toHaveCount(2);
   await expect(page.getByText('SYSTEM MONITORING ACTIVE')).toBeVisible();
   await expect(page.getByText('LOCAL MACHINE')).toHaveCount(0);
   await expect(

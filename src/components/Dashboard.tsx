@@ -92,9 +92,9 @@ export function Dashboard() {
               }
             />
           </div>
-          <Weather weather={weather} />
         </div>
       </div>
+      <Weather weather={weather} />
     </main>
   );
 }

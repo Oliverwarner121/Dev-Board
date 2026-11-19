@@ -50,7 +50,14 @@ p {
   position: relative;
   isolation: isolate;
   border-radius: 28px;
+}
+/* Widget background */
+.glass {
   background: rgba(61, 57, 57, 0.5);
+}
+/* Button background */
+.glass-lite {
+  background: rgba(98, 92, 92, 0.5);
 }
 .glass {
   -webkit-backdrop-filter: blur(40px) var(--refract, ) saturate(150%)
@@ -230,7 +237,8 @@ p {
   display: grid;
   grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
   gap: 18px;
-  align-items: start;
+  align-items: stretch;
+  margin-bottom: 18px;
 }
 .column {
   display: flex;
@@ -240,8 +248,18 @@ p {
 }
 .project-columns {
   display: grid;
+  flex: 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
+}
+.project-panel {
+  display: flex;
+  flex-direction: column;
+}
+.project-panel .projects {
+  flex: 1 1 0;
+  min-height: 200px;
+  max-height: none;
 }
 
 /* Panels */
@@ -394,7 +412,7 @@ p {
 /* Weather */
 .weather-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   margin: 0;
   padding: 0;
@@ -402,7 +420,47 @@ p {
 }
 .weather-item {
   --radius: 22px;
+  min-width: 0;
   padding: 14px 16px;
+}
+.weather-hours {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(58px, 1fr);
+  gap: 6px;
+  margin: 14px 0 0;
+  padding: 0 0 4px;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: thin;
+}
+.weather-hour {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 16px;
+  font-size: 18px;
+  line-height: 1;
+}
+.weather-hour[aria-current='time'] {
+  background: rgb(124 192 255 / 22%);
+  box-shadow: inset 0 0 0 1px rgb(124 192 255 / 45%);
+}
+.weather-hour-time,
+.weather-hour-rain {
+  color: var(--text-secondary);
+  font-family: var(--mono);
+  font-size: 10px;
+}
+.weather-hour-rain {
+  color: var(--accent);
+}
+.weather-hour-temp {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
 }
 .weather-place h3 {
   font-size: 14px;

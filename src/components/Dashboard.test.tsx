@@ -36,6 +36,13 @@ vi.mock('../services/weather', async (importOriginal) => ({
     isDay: true,
     high: 12,
     low: 6.7,
+    hourly: Array.from({ length: 24 }, (_, hour) => ({
+      hour,
+      temperature: 8,
+      weatherCode: 3,
+      isDay: hour > 6 && hour < 18,
+      rainChance: 10,
+    })),
   }),
 }));
 
