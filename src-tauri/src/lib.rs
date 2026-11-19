@@ -1,3 +1,5 @@
+mod launcher;
+
 use serde::Serialize;
 use sysinfo::{Disks, System};
 
@@ -48,10 +50,36 @@ fn get_system_snapshot() -> Result<SystemSnapshot, String> {
     })
 }
 
+#[tauri::command]
+async fn list_projects() -> Result<launcher::ProjectLists, String> {
+    tauri::async_runtime::spawn_blocking(launcher::list_projects)
+        .await
+        .map_err(|error| error.to_string())
+}
+
+#[tauri::command]
+async fn open_project(kind: String, name: String) -> Result<(), String> {
+    tauri::async_runtime::spawn_blocking(move || launcher::open_project(&kind, &name))
+        .await
+        .map_err(|error| error.to_string())?
+}
+
+#[tauri::command]
+async fn launch_shortcut(id: String) -> Result<(), String> {
+    tauri::async_runtime::spawn_blocking(move || launcher::launch_shortcut(&id))
+        .await
+        .map_err(|error| error.to_string())?
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![get_system_snapshot])
+        .invoke_handler(tauri::generate_handler![
+            get_system_snapshot,
+            list_projects,
+            open_project,
+            launch_shortcut
+        ])
         .run(tauri::generate_context!())
         .expect("error while running DevBoard");
 }
