@@ -50,8 +50,7 @@ export function Dashboard() {
             type="button"
             aria-label="Refresh dashboard"
           >
-            {refreshRefraction}
-            ↻ <span>Refresh</span>
+            {refreshRefraction}↻ <span>Refresh</span>
           </button>
         </div>
       </header>

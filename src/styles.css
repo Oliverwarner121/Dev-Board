@@ -60,9 +60,9 @@ p {
   background: rgba(98, 92, 92, 0.5);
 }
 .glass {
-  -webkit-backdrop-filter: blur(40px) var(--refract, ) saturate(150%)
+  -webkit-backdrop-filter: blur(40px) var(--refract,) saturate(150%)
     brightness(1.05);
-  backdrop-filter: blur(40px) var(--refract, ) saturate(100%) brightness(0.8);
+  backdrop-filter: blur(40px) var(--refract,) saturate(100%) brightness(0.8);
 }
 .glass-lite {
   --radius: 800px;
